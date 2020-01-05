@@ -67,12 +67,16 @@ namespace EMDB_Translator
                 langList.Add(tmp.Replace(".lng", ""));
             }
 
-            cmbLang.ItemsSource = langList;
-            cmbLang.Text = "Select Your Language...";
-            cmbLang.SelectedItem = "Persian";
 
             source = $"{path}{source}";
+
+            cmbLang.ItemsSource = langList;
+            cmbLang.Text = "Select Your Language...";
+            
             dest = $"{path}{cmbLang.SelectedItem}.lng";
+            cmbLang.SelectedItem = "Persian";
+
+
         }
 
         private List<TranslationModel> ParseValues(string[] values)
@@ -130,7 +134,7 @@ namespace EMDB_Translator
             var items = datagridmain.Items.OfType<TranslationModel>();
             var exportList = new List<string>();
 
-            string exportPath = $"{path}\\{cmbLang.SelectedItem}.lng";
+            string exportPath = $"{cmbLang.SelectedItem}.lng";
 
             if (!(textName.Text == name) & !(textName.Text == "Your Name"))
             {
