@@ -1,0 +1,24 @@
+﻿<Window x:Class="EMDB_Translator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EMDB_Translator"
+        mc:Ignorable="d"
+        Title="EMDB Translator" Height="450" Width="800">
+    <Grid>
+        <DataGrid x:Name="datagridmain" Margin="10,34,10,46" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="AUTO" />
+                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="1*" />
+                <DataGridTextColumn Header="Translation" Binding="{Binding Translation}" Width="1*" />
+                <DataGridTextColumn Header="Info" Binding="{Binding Info}" Width="AUTO" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Load" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
+        <Button Content="Save" HorizontalAlignment="Left" Margin="116,0,0,10" VerticalAlignment="Bottom" Width="76" Click="Button_Click_2" />
+        <ComboBox Name="cmbLang" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
+        <TextBox Name="textName" HorizontalAlignment="Right" Height="23" Margin="0,0,147,9" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Bottom" Width="359" />
+        <Label Content="First click on Load Button, Then select your desired langauge and specify your name." HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="772"/>
+    </Grid>
+</Window>
