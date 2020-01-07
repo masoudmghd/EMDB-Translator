@@ -29,12 +29,14 @@ namespace EMDB_Translator
 
         string path = @"C:\Program Files (x86)\EMDB\languages\";
         string source = "English.lng";
-        string dest = "English.lng";
         string version = "";
         string name = "";
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            path = @"C:\Program Files (x86)\EMDB\languages\";
+            source = "English.lng";
+
             if (!File.Exists($"{path}{source}"))
             {
                 path = @"C:\Program Files\EMDB\languages\";
@@ -72,11 +74,10 @@ namespace EMDB_Translator
 
             cmbLang.ItemsSource = langList;
             cmbLang.Text = "Select Your Language...";
-            
-            dest = $"{path}{cmbLang.SelectedItem}.lng";
             cmbLang.SelectedItem = "Persian";
 
-
+            var dest = $"{path}{cmbLang.SelectedItem}.lng";
+            Process(source, dest);
         }
 
         private List<TranslationModel> ParseValues(string[] values)
@@ -166,12 +167,16 @@ namespace EMDB_Translator
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var dest = $"{path}{cmbLang.SelectedItem}.lng";
-            datagridmain.AutoGenerateColumns = false;
-            datagridmain.ItemsSource = Process(source, dest);
+            Process(source, dest);
         }
 
-        private List<TranslationModel> Process(string source,string dest)
+        private void Process(string source,string dest)
         {
+            if (!File.Exists(dest))
+            {
+                System.Windows.MessageBox.Show("Destination language is not available...");
+                return;
+            }
             var sourceValues = File.ReadAllLines(source);
             var destValues = File.ReadAllLines(dest);
 
@@ -191,7 +196,8 @@ namespace EMDB_Translator
                     }
                 }
             }
-            return sourceTranslations;
+            datagridmain.AutoGenerateColumns = false;
+            datagridmain.ItemsSource = sourceTranslations;
         }
     }
 }
