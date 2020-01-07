@@ -7,7 +7,7 @@ This is a helper desktop application for whom wants to contribute translation fo
 * Speedify your translation.
 
 ## How to Use :
-1. Download the application here : [Releases]
+1. Download the application here : [Releases](https://github.com/masoudmghd/EMDB-Translator/releases).
 1. Press "Load" Button. (Note: You have to have EMDB installed on your system.)
 1. Choose your language from the combobox. It will refresh the table automatically.
 1. Do your translation in the Data Grid.
