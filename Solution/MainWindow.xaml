@@ -5,20 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EMDB_Translator"
         mc:Ignorable="d"
-        Title="EMDB Translator" Height="450" Width="800">
+        Title="EMDB Translator" Height="511" Width="800">
     <Grid>
-        <DataGrid x:Name="datagridmain" Margin="10,34,10,46" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <DataGrid x:Name="datagridmain" Margin="10,34,10,117" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="AUTO" />
-                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="1*" />
-                <DataGridTextColumn Header="Translation" Binding="{Binding Translation}" Width="1*" />
-                <DataGridTextColumn Header="Info" Binding="{Binding Info}" Width="AUTO" />
+                <DataGridTextColumn Header="Source" Binding="{Binding Source}" Width="5*" />
+                <DataGridTextColumn Header="Translation" Binding="{Binding Translation}" Width="5*" />
+                <DataGridTextColumn Header="Info" Binding="{Binding Info}" Width="1*" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Load" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="Button_Click"/>
-        <Button Content="Save" HorizontalAlignment="Left" Margin="116,0,0,10" VerticalAlignment="Bottom" Width="76" Click="Button_Click_2" />
-        <ComboBox Name="cmbLang" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
-        <TextBox Name="textName" HorizontalAlignment="Right" Height="23" Margin="0,0,147,9" TextWrapping="Wrap" Text="Your Name" VerticalAlignment="Bottom" Width="359" />
+        <Button Name="btnLoad" Content="Load" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Width="75" Click="btnLoad_Click"/>
+        <Button Name="btnSave" Content="Save" HorizontalAlignment="Left" Margin="103,0,0,10" VerticalAlignment="Bottom" Width="76" Click="btnSave_Click" IsEnabled="False"/>
+        <ComboBox Text="---Select Destination Language---" Name="cmbLang" IsEditable="True" IsReadOnly="True" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Width="275" SelectionChanged="ComboBox_SelectionChanged" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" IsEnabled="False"/>
+        <TextBox Name="textName" HorizontalAlignment="Right" Height="23" Margin="0,0,10,45" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="275" IsEnabled="False"/>
         <Label Content="First click on Load Button, Then select your desired langauge and specify your name." HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="772"/>
+        <Label Content="Latest Version :" HorizontalAlignment="Right" Margin="0,0,285,77" VerticalAlignment="Bottom" Width="89"/>
+        <TextBox x:Name="txtVersion" HorizontalAlignment="Right" Height="23" Margin="0,0,216,77" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="69" IsEnabled="False"/>
+        <Label Content="Translator :" HorizontalAlignment="Right" Margin="0,0,285,43" VerticalAlignment="Bottom" Width="68"/>
+        <Label Content="Translation Version :" HorizontalAlignment="Right" Margin="0,0,79,77" VerticalAlignment="Bottom" Width="116"/>
+        <TextBox x:Name="txtDestVersion" HorizontalAlignment="Right" Height="23" Margin="0,0,10,77" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" Width="69" IsEnabled="False"/>
+        <Label Content="Language :" HorizontalAlignment="Right" Margin="0,0,285,12" VerticalAlignment="Bottom" Width="68"/>
     </Grid>
 </Window>

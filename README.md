@@ -7,7 +7,7 @@ This is a helper desktop application for whom wants to contribute translation fo
 * Speedify your translation.
 
 ## How to Use :
-1. Download the application here : [Releases]
+1. Download the application here : [Releases](https://github.com/masoudmghd/EMDB-Translator/releases).
 1. Press "Load" Button. (Note: You have to have EMDB installed on your system.)
 1. Choose your language from the combobox. It will refresh the table automatically.
 1. Do your translation in the Data Grid.
@@ -22,8 +22,16 @@ This is a helper desktop application for whom wants to contribute translation fo
 #### Suggestion : If you want to contribute your translation to EMDB team, please reach them on [EMDB](https://www.emdb.eu/contact.html).
 
 
-## What to do :
-* Autosave interval / after every edit
-* Add send via mail option
+## What to do in next version:
+**Ideas :**
+- [ ] Autosave interval / after every edit
+- [ ] Add send via mail option
+- [ ] Option to create and start a new language file.
 
+**Recommended :**
+- [ ] Show the version of the translations.
+- [ ] Show and create an option to change the export or import translation files.
+- [ ] Show the missing, new and changed translations (marked with NEW-> CHANGED->) in a different (background) color.
 
+## What to fix:
+- [ ] Load without a predefined langauge.

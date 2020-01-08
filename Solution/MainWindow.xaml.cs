@@ -32,7 +32,7 @@ namespace EMDB_Translator
         string version = "";
         string name = "";
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnLoad_Click(object sender, RoutedEventArgs e)
         {
             path = @"C:\Program Files (x86)\EMDB\languages\";
             source = "English.lng";
@@ -74,13 +74,19 @@ namespace EMDB_Translator
 
             cmbLang.ItemsSource = langList;
             cmbLang.Text = "Select Your Language...";
-            cmbLang.SelectedItem = "Persian";
+            //cmbLang.SelectedItem = "English";
 
-            var dest = $"{path}{cmbLang.SelectedItem}.lng";
-            Process(source, dest);
+            //var dest = $"{path}{cmbLang.SelectedItem}.lng";
+            Process(source, null);
+            btnLoad.IsEnabled = false;
+            btnSave.IsEnabled = true;
+            cmbLang.IsEnabled = true;
+            txtVersion.IsEnabled = true;
+            txtDestVersion.IsEnabled = true;
+            textName.IsEnabled = true;
         }
 
-        private List<TranslationModel> ParseValues(string[] values)
+        private List<TranslationModel> ParseValues(string[] values, bool dest)
         {
             List<TranslationModel> translations = new List<TranslationModel>();
             string[] itemSplited;
@@ -117,18 +123,30 @@ namespace EMDB_Translator
                 }
                 else if (item.Contains("Version: "))
                 {
-                    version = item.Replace("; Version: ", "");
+                    var versionTmp = item.Replace("; Version: ", "");
+                    if (dest == true)
+                    {
+                        txtDestVersion.Text = versionTmp;
+                    }
+                    else
+                    {
+                        txtVersion.Text = versionTmp;
+                        version = versionTmp;
+                    }
                 }
                 else if (item.Contains("Translated by: "))
                 {
-                    name = item.Replace("; Translated by: ", "");
-                    textName.Text = name;
+                    if (dest == true)
+                    {
+                        name = item.Replace("; Translated by: ", "");
+                        textName.Text = name;
+                    }
                 }
             }
             return translations;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void btnSave_Click(object sender, RoutedEventArgs e)
         {
             string language = cmbLang.SelectedItem.ToString();
             string date = DateTime.Now.ToString("yyyy-MM-dd");
@@ -143,6 +161,7 @@ namespace EMDB_Translator
             }
 
             exportList.Add("; -------------------------------------------------------------------------------");
+            exportList.Add("; EMDB Language file.");
             exportList.Add($"; Language: {language}");
             exportList.Add($"; Version: {version}");
             exportList.Add($"; Date: {date}");
@@ -155,7 +174,7 @@ namespace EMDB_Translator
                 {
                     exportList.Add(item.Source);
                 }
-                else
+                else if (item.Translation != null)
                 {
                     exportList.Add($"{item.Id}={item.Translation}");
                 }
@@ -170,28 +189,31 @@ namespace EMDB_Translator
             Process(source, dest);
         }
 
-        private void Process(string source,string dest)
+        private void Process(string source, string dest)
         {
-            if (!File.Exists(dest))
-            {
-                System.Windows.MessageBox.Show("Destination language is not available...");
-                return;
-            }
             var sourceValues = File.ReadAllLines(source);
-            var destValues = File.ReadAllLines(dest);
+            var sourceTranslations = ParseValues(sourceValues, false);
 
-            var sourceTranslations = ParseValues(sourceValues);
-            var destTranslations = ParseValues(destValues);
-
-            foreach (var sourceItem in sourceTranslations)
+            if (dest != null)
             {
-                foreach (var destItem in destTranslations)
+                if (!File.Exists(dest))
                 {
-                    if (sourceItem.Id != null)
+                    System.Windows.MessageBox.Show("Destination language is not available...");
+                    return;
+                }
+                var destValues = File.ReadAllLines(dest);
+                var destTranslations = ParseValues(destValues, true);
+
+                foreach (var sourceItem in sourceTranslations)
+                {
+                    foreach (var destItem in destTranslations)
                     {
-                        if (sourceItem.Id == destItem.Id)
+                        if (sourceItem.Id != null)
                         {
-                            sourceItem.Translation = destItem.Source;
+                            if (sourceItem.Id == destItem.Id)
+                            {
+                                sourceItem.Translation = destItem.Source;
+                            }
                         }
                     }
                 }
